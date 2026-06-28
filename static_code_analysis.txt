@@ -1,0 +1,19 @@
+Static Code Analysis using Pylint
+
+Command executed:
+
+pylint server.py
+
+Output:
+************* Module server
+server.py:38:0: C0304: Final newline missing (missing-final-newline)
+
+------------------------------------------------------------------
+Your code has been rated at 9.23/10 (previous run: 9.23/10, +0.00)
+
+************* Module server
+server.py:38:0: C0304: Final newline missing (missing-final-newline)
+
+------------------------------------------------------------------
+Your code has been rated at 9.23/10 (previous run: 9.23/10, +0.00)
+
