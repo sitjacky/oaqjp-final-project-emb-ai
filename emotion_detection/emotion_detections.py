@@ -1,28 +1,35 @@
-import requests
 import json
+import requests
 
 
-def emotion_detector(text_to_analyze):
+def emotion_detections(text_to_analyze):
     """
-    Analyze the emotion of the input text using the Watson NLP Emotion API.
+    Analyze the emotion of the supplied text using the Watson NLP API.
+
+    Returns a dictionary containing the five emotion scores and the
+    dominant emotion. If the API returns HTTP 400, all values are None.
     """
 
-    url = "https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict"
+    url = (
+        "https://sn-watson-emotion.labs.skills.network/"
+        "v1/watson.runtime.nlp.v1/NlpService/EmotionPredict"
+    )
 
     headers = {
-        "grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock",
+        "grpc-metadata-mm-model-id":
+            "emotion_aggregated-workflow_lang_en_stock",
         "Content-Type": "application/json"
     }
 
-    myobj = {
+    payload = {
         "raw_document": {
             "text": text_to_analyze
         }
     }
 
-    response = requests.post(url, json=myobj, headers=headers)
+    response = requests.post(url, json=payload, headers=headers)
 
-    # Handle invalid input
+    # Handle invalid or empty input
     if response.status_code == 400:
         return {
             "anger": None,
